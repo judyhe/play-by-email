@@ -22,7 +22,7 @@ Game.COLORS = [
 ];
 
 Game.newGame = function(player1, otherPlayers, callback) {
-  var game = new Game();
+  var game = {};
   game.board = Game.newBoard();
   game.current_player = 0;
   game.round = 1;
