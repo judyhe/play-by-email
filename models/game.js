@@ -41,7 +41,7 @@ Game.newGame = function(player1, otherPlayers, callback) {
     game.players.push(player);
   }
 
-  game.save(function(err){
+  Game.save(game, function(err){
     if (err) return callback(err);
     mailer.newGame(players[0], players.slice(1), game, callback);
   });
