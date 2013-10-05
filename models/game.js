@@ -47,7 +47,7 @@ Game.instance.update = function(moves, callback){
 };
 
 
-Group.instance.incrementUser = function() {
+Game.instance.incrementUser = function() {
   this.current_player = this.current_player >= this.players.length-1 ? 0 : this.current_player+1;
 };
 
