@@ -26,7 +26,7 @@ Game.newGame = function(player1, otherPlayers, callback) {
   game.board = Game.newBoard();
   game.current_player = 0;
   game.round = 1;
-  
+
   if (otherPlayers.length < 1) return callback(new Error("Must CC another player"));
 
   var players = player1.concat(otherPlayers);
@@ -107,7 +107,7 @@ Game.killDots = function(dotsPicked, board){
     // 2nd time to add new dots
     var row;
     for (row=0; row<rowLen; row++) {
-    
+
       var isPicked = false;
 
       for (var d=0, den=dotsPicked.length; d<den; d++) {
@@ -139,7 +139,18 @@ Game.killDots = function(dotsPicked, board){
 
 
 Game.hasSquare = function(dotsToKill){
-  if (dotsToKill < 3) return false;
+  if (dotsToKill.length < 3) return false;
+  if (dotsToKill.length > 5) return false;
+
+  var dot1row = Game.getRowFromPosition(dotsToKill[0]);
+  var dot2row = Game.getRowFromPosition(dotsToKill[1]);
+  var dot3row = Game.getRowFromPosition(dotsToKill[2]);
+  var dot4row = Game.getRowFromPosition(dotsToKill[3]);
+  var dot1col = Game.getColFromPosition(dotsToKill[0]);
+  var dot2col = Game.getColFromPosition(dotstoKill[1]);
+  var dot3col = Game.getColFromPosition(dotsToKill[2]);
+  var dot4col = Game.getColFromPosition(dotsToKill[3]);
+
   // todo: fill this in
 };
 
@@ -167,7 +178,7 @@ Game.getColorFromPosition = function(rowCol, board) {
   var col = Game.getColFromPosition(rowCol);
 
   if (row === undefined && col === undefined) return false;
-  
+
   return board[col][row];
 };
 
@@ -177,7 +188,7 @@ Game.getPositionsFromColor = function(color, board) {
   var positions = [];
 
   for (var i=0, len=Game.COLS.length; i<len; i++) {
-    
+
     for (var j=0, jen=Game.ROWS.length; j<jen; j++) {
       if (board[i][j] === color) {
         positions.push(Game.getPositionFromRowCol(j, i));
@@ -188,7 +199,7 @@ Game.getPositionsFromColor = function(color, board) {
   return positions;
 };
 
-// get the string label for the row and col 
+// get the string label for the row and col
 // in: integer
 // return string
 Game.getPositionFromRowCol = function(row, col) {
