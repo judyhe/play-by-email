@@ -1,0 +1,11 @@
+{
+  "name": "play-by-email",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "*"
+  },
+  "engines": {
+    "node": "0.10.15",
+    "npm": "1.2.10"
+  }
+}
