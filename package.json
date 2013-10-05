@@ -2,7 +2,13 @@
   "name": "play-by-email",
   "version": "0.0.1",
   "dependencies": {
-    "express": "*"
+    "addressparser": "*",
+    "async": "*",
+    "express": "*",
+    "ejs": "*",
+    "nano": "*",
+    "sendgrid": "*",
+    "underscore": "*"
   },
   "engines": {
     "node": "0.10.15",
