@@ -2,10 +2,35 @@
 <html>
   <head>
     <title>We're Playing</title>
-    <link rel="stylesheet" href="/css/style.css">    
   </head>
   
   <body>
-    
+    <% include _board %>
+
+    <form action="/" method="POST">
+      <input type="text" name="moves" />      
+      <input type="submit" value="play" />
+    </form>
+
+    <% if (next_board) { %> 
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <th></th>
+        <% for(var i=0, len=Game.COLS.length; i<len; i++) {%> 
+          <th style="font-weight:normal; color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.COLS[i] %> </th>
+        <%} %>
+      </tr>
+      <% for (var i=0, len=Game.ROWS.length; i<len; i++) { %>
+        <tr>
+          <td style="color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.ROWS[i] %></td>
+          <% for (var j=0, jen=Game.COLS.length; j<jen; j++) { %>
+            <td>
+              <div style="width:22px; height:22px; border-radius: 12px; -moz-border-radius: 12px;  background:#<%=Game.COLORS[next_board[j][i]] %>; margin:18px;">&nbsp;</div>
+            </td>
+          <% } %>
+        </tr>
+      <% } %>      
+    </table>
+    <% } %>  
   </body>
 </html>
