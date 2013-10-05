@@ -54,7 +54,7 @@ app.post('/play', function(req, res){
     // find the gameid
     var gameid = req.body.text.match(/gameid:.*/);
     if (!gameid) return res.send(200);
-    gameid = gameid.split(':');
+    gameid = gameid.split(': ').trim();
 
     Game.get(gameid[1], function(err, game){
       if (err || !game.board) {

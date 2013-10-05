@@ -21,6 +21,37 @@ Game.COLORS = [
   '8ce891'
 ];
 
+Game.instance.update = function(moves, callback){
+  this.incrementUser();
+  if (this.current_player === 0){
+    round++;
+  }
+  var _this = this;
+
+  this.previous_board = this.board;
+  var results = Game.playMoves(moves, this.board);
+
+  this.board = results.board;
+  this.players[this.current_player].score = this.players[this.current_player].score + results.score;
+
+  this.save(function(err){
+    if (err) return callback(err);
+    for (var i=0, len=_this.players.length; i<len; i++) {
+      if (i === _this.current_player) {
+        mailer.play(_this.players[i], true, _this, moves, callback);
+      } else {
+        mailer.play(_this.players[i], false, _this, moves, callback);
+      }
+    }
+  });
+};
+
+
+Group.instance.incrementUser = function() {
+  this.current_player = this.current_player >= this.players.length-1 ? 0 : this.current_player+1;
+};
+
+
 Game.newGame = function(player1, otherPlayers, callback) {
   var game = {};
   game.board = Game.newBoard();
@@ -71,7 +102,10 @@ Game.playMoves = function(moves, board){
 
   var score = dotsToKill.length;
 
-  return Game.killDots(dotsToKill, board);
+  return {
+    new_board: Game.killDots(dotsToKill, board),
+    score: score
+  };
 };
 
 Game.isAdjacent = function(position1, position2) {

@@ -1,0 +1,71 @@
+<% if (isCurrentPlayer) { %> 
+<p>>>>REPLY ABOVE</p>
+
+<p>It's your turn! </p>
+
+<p>Reply back with the coordinates of a sequence of dots that are the same color to clear them. </p>
+
+<p>Start with the letter first. For example: a3</p>
+
+<p>Separate coordinates with a comma. For example: a3, a2</p>
+
+<div style="display:none; visibility:hidden; color:#fff">gameid: <%= id %></div>
+
+<% } else { %>
+
+We just sent the following dots board to your friend. 
+
+<% } %>
+
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <th></th>
+    <% for(var i=0, len=Game.COLS.length; i<len; i++) {%> 
+      <th style="font-weight:normal; color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.COLS[i] %> </th>
+    <%} %>
+  </tr>
+  <% for (var i=0, len=Game.ROWS.length; i<len; i++) { %>
+    <tr>
+      <td style="color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.ROWS[i] %></td>
+      <% for (var j=0, jen=Game.COLS.length; j<jen; j++) { %>
+        <td align="center" valign="middle">
+          <% var size = '20px';
+            for (var m=0, movesLen=moves.length; m<movesLen; m++) { 
+              if (moves[m] === Game.getPositionFromRowCol(i, j)) {
+                size = '10px';
+              }
+            } %>
+          <div style="width:<%= size %>; height:<%= size %>; border-radius: 12px; -moz-border-radius: 12px; background:#<%=Game.COLORS[board[j][i]] %>; margin:18px;">&nbsp;</div>
+        </td>
+      <% } %>
+    </tr>
+  <% } %>      
+</table>
+
+
+<p>The previous board</p>
+
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <th></th>
+    <% for(var i=0, len=Game.COLS.length; i<len; i++) {%> 
+      <th style="font-weight:normal; color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.COLS[i] %> </th>
+    <%} %>
+  </tr>
+  <% for (var i=0, len=Game.ROWS.length; i<len; i++) { %>
+    <tr>
+      <td style="color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.ROWS[i] %></td>
+      <% for (var j=0, jen=Game.COLS.length; j<jen; j++) { %>
+        <td align="center" valign="middle">
+          <% var size = '20px';
+            for (var m=0, movesLen=moves.length; m<movesLen; m++) { 
+              if (moves[m] === Game.getPositionFromRowCol(i, j)) {
+                size = '10px';
+              }
+            } %>
+          <div style="width:<%= size %>; height:<%= size %>; border-radius: 12px; -moz-border-radius: 12px; background:#<%=Game.COLORS[previous_board[j][i]] %>; margin:18px;">&nbsp;</div>
+        </td>
+      <% } %>
+    </tr>
+  <% } %>      
+</table>
