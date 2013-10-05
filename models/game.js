@@ -30,16 +30,21 @@ Game.newGame = function(player1, otherPlayers, callback) {
   if (otherPlayers.length < 1) return callback(new Error("Must CC another player"));
 
   var players = player1.concat(otherPlayers);
+  game.players = [];
 
   for (var i=0, len=players.length; i<len; i++) {
-    var user = {
+    var player = {
       name: players[i].name,
       email: players[i].address,
       score: 0
     };
+    game.players.push(player);
   }
 
-  mailer.newGame(players[0], callback);
+  game.save(function(err){
+    if (err) return callback(err);
+    mailer.newGame(players[0], players.slice(1), game, callback);
+  });
 };
 
 Game.playMoves = function(moves, board){
@@ -142,16 +147,8 @@ Game.hasSquare = function(dotsToKill){
   if (dotsToKill.length < 3) return false;
   if (dotsToKill.length > 5) return false;
 
-  var dot1row = Game.getRowFromPosition(dotsToKill[0]);
-  var dot2row = Game.getRowFromPosition(dotsToKill[1]);
-  var dot3row = Game.getRowFromPosition(dotsToKill[2]);
-  var dot4row = Game.getRowFromPosition(dotsToKill[3]);
-  var dot1col = Game.getColFromPosition(dotsToKill[0]);
-  var dot2col = Game.getColFromPosition(dotstoKill[1]);
-  var dot3col = Game.getColFromPosition(dotsToKill[2]);
-  var dot4col = Game.getColFromPosition(dotsToKill[3]);
-
-  // todo: fill this in
+  // todo: fix this
+  return true;
 };
 
 Game.newBoard = function(){

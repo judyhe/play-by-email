@@ -1,3 +1,11 @@
+<p>Let's get this party started!</p>
+
+<p>Reply back with the coordinates of a sequence of dots that are the same color to clear them. </p>
+
+<p>Start with the letter first. For example: a3</p>
+
+<p>Separate coordinates with a comma. For example: a3, a2</p>
+
 <table cellspacing="0" cellpadding="0" border="0">
   <tr>
     <th></th>
@@ -10,15 +18,11 @@
       <td style="color:#ccc; padding:18px; font-family:Helvetica, Arial;"><%= Game.ROWS[i] %></td>
       <% for (var j=0, jen=Game.COLS.length; j<jen; j++) { %>
         <td align="center" valign="middle">
-          <% var size = '20px';
-            for (var m=0, movesLen=moves.length; m<movesLen; m++) { 
-              if (moves[m] === Game.getPositionFromRowCol(i, j)) {
-                size = '10px';
-              }
-            } %>
-          <div style="width:<%= size %>; height:<%= size %>; border-radius: 12px; -moz-border-radius: 12px; background:#<%=Game.COLORS[board[j][i]] %>; margin:18px;">&nbsp;</div>
+          <div style="width:20px; height:20px; border-radius: 12px; -moz-border-radius: 12px; background:#<%=Game.COLORS[board[j][i]] %>; margin:18px;">&nbsp;</div>
         </td>
       <% } %>
     </tr>
   <% } %>      
 </table>
+
+<div style="display:none;">gameid: <%= id %></div>

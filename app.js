@@ -34,6 +34,7 @@ app.post('/', function(req, res){
 var addressparser = require("addressparser");
 
 app.post('/play', function(req, res){
+  console.log(req.body);
   var subject = req.body.subject.toLowerCase().trim();
   var from = addressparser(req.body.from);
   var cc = addressparser(req.body.cc);
