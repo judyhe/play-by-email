@@ -22,11 +22,14 @@ app.post('/', function(req, res){
     var board = game.board;
 
     var moves = _.map(req.body.moves.split(','), function(move) {return move.trim();});
-    var next_board = Game.playMoves(moves, board);
+    var results = Game.playMoves(moves, board);
+    var next_board = results.new_board;
+    var score = results.score;
+
     if (next_board instanceof Error) {
       res.render('error', {error: next_board});
     } else {
-      res.render('index', {board: board, next_board: next_board, moves: moves});
+      res.render('index', {board: board, next_board: next_board, score: score, moves: moves});
     }
   });
 });
